@@ -5,15 +5,18 @@ from fastapi import FastAPI
 from app.api.router import api_router
 from app.core.config import settings
 from app.core.logging import configure_logging
+import logging
+
+logger=logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     configure_logging()
-    print("Application is starting up....")
+    logger.info("Application is starting up...")
 
     yield
 
-    print("Application is shutting down....")
+    logger.info("Application is shutting down....")
 
 app=FastAPI(
     title=settings.app_name,
